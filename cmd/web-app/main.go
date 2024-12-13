@@ -1,25 +1,13 @@
 package main
 
 import (
+	"github.com/hugorjs/url-shortner-app/internal/controllers"
 	"log"
 	"net/http"
-	"text/template"
 )
 
 func main() {
-	http.HandleFunc("/", ShowHomePage)
+	http.HandleFunc("/", controllers.ShowIndex)
+	http.HandleFunc("/shorten", controllers.Shorten)
 	log.Fatal(http.ListenAndServe(":8080", nil))
-}
-
-func ShowHomePage(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("internal/views/index.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if err = tmpl.Execute(w, nil); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
 }
