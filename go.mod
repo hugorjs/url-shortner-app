@@ -1,3 +1,1 @@
-module url-shortner-app
-
-go 1.23
+module github.com/hugorjs/url-shortner-app
