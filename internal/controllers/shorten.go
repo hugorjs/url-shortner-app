@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/hugorjs/url-shortner-app/internal/url"
 	"html/template"
 	"net/http"
 	"strings"
@@ -23,8 +24,10 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// shorten then URL.
+	shortUrl := url.Shorten(originalURL)
+
 	data := map[string]string{
-		"ShortURL": originalURL,
+		"ShortURL": shortUrl,
 	}
 
 	t, err := template.ParseFiles("internal/views/shorten.html")
